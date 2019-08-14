@@ -112,15 +112,10 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
-//Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
 
 
 
 
-function expandButtonCreator(){
-  const span = document.createElement('span')
-  span.classList.add('expandButton')
-}
 function thirdParagraphCreator(thirdParagraph){
   const thirdP = document.createElement('p')
   thirdP.classList.add('paragraph')
@@ -158,21 +153,32 @@ const articleContainer = document.querySelector('.articles')
 function profileCreator (title, date, firstParagraph, secondParagraph, thirdParagraph){
 const profiles = document.createElement('div')
 profiles.classList.add("article")
+profiles.classList.add("close")
+profiles.classList.add("article-open")
 profiles.appendChild(h1Creator(title))
 profiles.appendChild(dateParagraphCreator(date))
 profiles.appendChild(firstParagraphCreator(firstParagraph))
 profiles.appendChild(secondParagraphCreator(secondParagraph))
 profiles.appendChild(thirdParagraphCreator(thirdParagraph))
-// profiles.appendChild(expandButtonCreator())
-
-
 
 return profiles
 }
-
+const articleOpen = document.querySelectorAll(".article-open")
+function expandButtonCreator(){
+  const span = document.createElement('span')
+  span.classList.add('expandButton')
+  span.addEventListener('click', () => {
+    profiles.classList.toggle('article-open')
+})
+return span
+}
 const articleComponents = data.forEach((profiles)=>{
   articleContainer.appendChild(profileCreator(profiles.title, profiles.date, profiles.firstParagraph, profiles.secondParagraph, profiles.thirdParagraph)
-)})
+
+)
+articleContainer.appendChild(expandButtonCreator())
+})
+
 // articleComponents.forEach((profiles)=>{
 //   articleContainer.appendChild(profiles)
 // })
