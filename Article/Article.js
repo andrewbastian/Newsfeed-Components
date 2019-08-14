@@ -98,41 +98,6 @@ const data = [
 
     <span class='expandButton'></span>
   </div>
-////////////////////////////////
-  function textCreator(text) {
-    const span = document.createElement('span')
-    span.textContent = text
-    span.style.color = 'white'
-
-    return span
-  }
-
-  // Our component creator function
-  // Call any number of times to create a new component!
-  function buttonCreator(text, size = 'medium') {
-    const button = document.createElement('button')
-    button.classList.add('btn-primary')
-    button.classList.add(`btn-${size}`)
-
-    // nesting another component inside the button
-    // there is no limit to the amount of nested components
-    button.appendChild(textCreator(text || 'some default value'))
-
-    return button
-  }
-
-  const container = document.querySelector('#container')
-
-  // container.appendChild(buttonCreator('A small button', 'small'))
-  // container.appendChild(buttonCreator('A medium button'))
-  // container.appendChild(buttonCreator('A large button', 'large'))
-  //
-  // OR>>>>
-  //
-  buttonData.forEach((button)=>{
-    container.appendChild(buttonCreator(button.text, button.size))
-  })
-
 
   Hint: You will need to use createElement more than once here!
 
@@ -144,31 +109,70 @@ const data = [
 
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
+  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+//Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
+
+
+
+
 function expandButtonCreator(){
   const span = document.createElement('span')
   span.classList.add('expandButton')
 }
-function thirdParagraphCreator(){
-  const thirdParagraph = document.createElement('p')
-  thirdParagraph.classList.add('paragraph')
+function thirdParagraphCreator(thirdParagraph){
+  const thirdP = document.createElement('p')
+  thirdP.classList.add('paragraph')
+  thirdP.textContent = thirdParagraph
+  return thirdP
 }
-function secondParagraph(){
-  const secondParagraph = document.createElement('p')
-  secondParagraph.classList.add('paragraph')
+function secondParagraphCreator(secondParagraph){
+  const secondP = document.createElement('p')
+  secondP.classList.add('paragraph')
+  secondP.textContent = secondParagraph
+  return secondP
 }
-function thirdParagraphCreator(){
-  const firstParagraph = document.createElement('p')
-  firstParagraph.classList.add('paragraph')
+function firstParagraphCreator(firstParagraph){
+  const firstP = document.createElement('p')
+  firstP.classList.add('paragraph')
+  firstP.textContent = firstParagraph
+  return firstP
 }
 //
-function dateParagraphCreator(){
+function dateParagraphCreator(date){
   const dateParagraph = document.createElement('p')
   dateParagraph.classList.add('date')
+  dateParagraph.textContent = date
+  return dateParagraph
 }
-function dateParagraphCreator(){
-  const dateParagraph = document.createElement('p')
-  dateParagraph.classList.add('date')
+function h1Creator(title){
+  const h1 = document.createElement('h1')
+  h1.textContent = title
+  return h1
 }
+
+const articleContainer = document.querySelector('.articles')
+
+
+function profileCreator (title, date, firstParagraph, secondParagraph, thirdParagraph){
+const profiles = document.createElement('div')
+profiles.classList.add("article")
+profiles.appendChild(h1Creator(title))
+profiles.appendChild(dateParagraphCreator(date))
+profiles.appendChild(firstParagraphCreator(firstParagraph))
+profiles.appendChild(secondParagraphCreator(secondParagraph))
+profiles.appendChild(thirdParagraphCreator(thirdParagraph))
+// profiles.appendChild(expandButtonCreator())
+
+
+
+return profiles
+}
+
+const articleComponents = data.forEach((profiles)=>{
+  articleContainer.appendChild(profileCreator(profiles.title, profiles.date, profiles.firstParagraph, profiles.secondParagraph, profiles.thirdParagraph)
+)})
+// articleComponents.forEach((profiles)=>{
+//   articleContainer.appendChild(profiles)
+// })
