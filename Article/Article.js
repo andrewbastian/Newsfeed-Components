@@ -163,18 +163,34 @@ profiles.appendChild(thirdParagraphCreator(thirdParagraph))
 
 return profiles
 }
-const articleOpen = document.querySelectorAll(".article-open")
+
 function expandButtonCreator(){
   const span = document.createElement('span')
   span.classList.add('expandButton')
-  span.addEventListener('click', () => {
-    profiles.classList.toggle('article-open')
+  span.textContent = "open"
+  // const articleOpen = document.querySelectorAll(".article-open")
+  span.addEventListener('click', (event) => {
+    if (profiles.classList){
+      profiles.classList.toggle('article-open');
+    }
+    else{
+      const classes = profiles.className.split('')
+      const i = profiles.indexOf("articleOpen");
+
+      if (i>= 0)
+      classes.splice(i, 1);
+      else
+      classes.push("articleOpen")
+      profiles.className = classes.join("")
+    }
 })
 return span
 }
+
+
+
 const articleComponents = data.forEach((profiles)=>{
   articleContainer.appendChild(profileCreator(profiles.title, profiles.date, profiles.firstParagraph, profiles.secondParagraph, profiles.thirdParagraph)
-
 )
 articleContainer.appendChild(expandButtonCreator())
 })
