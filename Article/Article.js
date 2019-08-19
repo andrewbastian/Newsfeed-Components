@@ -37,9 +37,9 @@ const data = [
         mewing kittens Remus Lupin. Palominos scarlet train black robes, Metamorphimagus Niffler dead easy second bedroom. Padma
         and Parvati Sorting Hat Minister of Magic blue turban remember my last.`,
 
-    thirdParagraph: `Toad-like smile Flourish and Blotts he knew I’d come back Quidditch World Cup. Fat Lady baubles banana fritters fairy lights 
-        Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 inches of parchment. Head Boy start-of-term banquet Cleansweep Seven 
-        roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast Norwegian Ridgeback. Come seek us where our voices sound, we cannot 
+    thirdParagraph: `Toad-like smile Flourish and Blotts he knew I’d come back Quidditch World Cup. Fat Lady baubles banana fritters fairy lights
+        Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 inches of parchment. Head Boy start-of-term banquet Cleansweep Seven
+        roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast Norwegian Ridgeback. Come seek us where our voices sound, we cannot
         sing above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix tears good clean match.`
   },
   {
@@ -66,8 +66,8 @@ const data = [
         consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidorino Lorem ipsum dolor
         sit amet, consectetur adipiscing elit. Nidoking Lorem ipsum`,
 
-    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel 
-        Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James 
+    thirdParagraph: `Gotta catch 'em all Horsea gym Ninjask Absol Sinnoh Poliwag. Gotta catch 'em all Youngster wants to fight Soda Pop Floatzel
+        Leech Life Seismitoad Ariados. Earthquake Pokemon Glitch City Tail Whip Skitty Ekans Dialga. Ut aliquip ex ea commodo consequat James
         Castform Lotad the power that's inside Burnt Berry Makuhita. Ghost Ariados Corphish Dusclops Golbat Gligar Zweilous.`
   },
   {
@@ -88,8 +88,8 @@ const data = [
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
-  
+/* Step 1: Create a function that creates a component. You will want your component to look like the template below:
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -109,6 +109,92 @@ const data = [
 
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
+  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+
+
+
+function thirdParagraphCreator(thirdParagraph){
+  const thirdP = document.createElement('p')
+  thirdP.classList.add('paragraph')
+  thirdP.textContent = thirdParagraph
+  return thirdP
+}
+function secondParagraphCreator(secondParagraph){
+  const secondP = document.createElement('p')
+  secondP.classList.add('paragraph')
+  secondP.textContent = secondParagraph
+  return secondP
+}
+function firstParagraphCreator(firstParagraph){
+  const firstP = document.createElement('p')
+  firstP.classList.add('paragraph')
+  firstP.textContent = firstParagraph
+  return firstP
+}
+//
+function dateParagraphCreator(date){
+  const dateParagraph = document.createElement('p')
+  dateParagraph.classList.add('date')
+  dateParagraph.textContent = date
+  return dateParagraph
+}
+function h1Creator(title){
+  const h1 = document.createElement('h1')
+  h1.textContent = title
+  return h1
+}
+
+const articleContainer = document.querySelector('.articles')
+
+
+function profileCreator (title, date, firstParagraph, secondParagraph, thirdParagraph){
+const profiles = document.createElement('div')
+profiles.classList.add("article")
+profiles.classList.add("close")
+profiles.classList.add("article-open")
+profiles.appendChild(h1Creator(title))
+profiles.appendChild(dateParagraphCreator(date))
+profiles.appendChild(firstParagraphCreator(firstParagraph))
+profiles.appendChild(secondParagraphCreator(secondParagraph))
+profiles.appendChild(thirdParagraphCreator(thirdParagraph))
+
+return profiles
+}
+
+function expandButtonCreator(){
+  const span = document.createElement('span')
+  span.classList.add('expandButton')
+  span.textContent = "open"
+  // const articleOpen = document.querySelectorAll(".article-open")
+  span.addEventListener('click', (event) => {
+    if (profiles.classList){
+      profiles.classList.toggle('article-open');
+    }
+    else{
+      const classes = profiles.className.split('')
+      const i = profiles.indexOf("articleOpen");
+
+      if (i>= 0)
+      classes.splice(i, 1);
+      else
+      classes.push("articleOpen")
+      profiles.className = classes.join("")
+    }
+})
+return span
+}
+
+
+
+const articleComponents = data.forEach((profiles)=>{
+  articleContainer.appendChild(profileCreator(profiles.title, profiles.date, profiles.firstParagraph, profiles.secondParagraph, profiles.thirdParagraph)
+)
+articleContainer.appendChild(expandButtonCreator())
+})
+
+// articleComponents.forEach((profiles)=>{
+//   articleContainer.appendChild(profiles)
+// })
